@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#173b35">
+<title>Student Manager</title>
+<style>
+:root{--ink:#18332e;--muted:#6b7d78;--bg:#f4f7f5;--card:#fff;--line:#e2eae6;--green:#176b53;--mint:#e5f4ed;--red:#b64242;--amber:#96620c;--blue:#315da8}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:11px;padding:10px 13px;font-weight:650}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #9bcbbb;outline-offset:2px}
+.app{max-width:1100px;margin:auto;padding:16px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.brand{display:flex;align-items:center;gap:10px}.logo{background:var(--green);color:white;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:22px}.brand h1{font-size:20px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.primary{background:var(--green);color:white}.soft{background:var(--mint);color:var(--green)}.plain{background:#eef2f0;color:var(--ink)}.danger{background:#fbeaea;color:var(--red)}.tabs{display:flex;gap:7px;overflow-x:auto;padding:5px 0 13px;margin-bottom:12px}.tab{white-space:nowrap;background:#e9efec;color:#52645e}.tab.active{background:var(--green);color:white}.view{display:none}.view.active{display:block}.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0 15px}.section-head h2{font-size:21px;margin:0}.sub{color:var(--muted);font-size:13px;margin:4px 0 0}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.stat,.panel,.student-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}.stat .label{font-size:13px;color:var(--muted)}.stat strong{display:block;font-size:27px;margin-top:7px}.stat .symbol{float:right;font-size:20px}.panel{margin-top:14px}.panel h3{margin:0 0 12px;font-size:16px}.row{display:flex;gap:10px;align-items:center}.between{justify-content:space-between}.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:13px}.filters input,.filters select{flex:1;min-width:130px}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}.field label{font-size:13px;color:var(--muted);font-weight:650}.field input,.field select,.field textarea,.filters input,.filters select{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.list{display:grid;gap:9px}.student-card{display:flex;align-items:center;gap:12px;padding:12px}.avatar{width:42px;height:42px;border-radius:13px;background:var(--mint);color:var(--green);display:grid;place-items:center;font-weight:800;flex-shrink:0}.student-main{min-width:0;flex:1}.student-main strong{display:block;overflow-wrap:anywhere}.student-main small{color:var(--muted)}.actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.mini{padding:8px 10px;font-size:12px}.present{background:#def4e7;color:#176b53}.absent{background:#fbe7e7;color:#ad3333}.late{background:#fff0d4;color:#895d09}.leave{background:#e5edff;color:#315da8}.unmarked{background:#edf1ef;color:#62716c}.pill{display:inline-block;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:750}.empty{padding:25px;text-align:center;color:var(--muted);background:#fff;border:1px dashed var(--line);border-radius:14px}.hidden{display:none!important}.modal-backdrop{position:fixed;inset:0;background:#10231fc4;display:none;align-items:flex-end;justify-content:center;padding:12px;z-index:5}.modal-backdrop.show{display:flex}.modal{background:white;border-radius:20px;padding:20px;width:min(560px,100%);max-height:90vh;overflow:auto}.modal h2{margin:0 0 14px}.modal-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:14px}.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.info{background:var(--bg);padding:12px;border-radius:11px}.info small{display:block;color:var(--muted);margin-bottom:3px}.notice{background:#fff6df;color:#76520c;border:1px solid #f2e3b9;padding:12px;border-radius:12px;font-size:13px;margin-top:14px}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:520px}th,td{text-align:left;padding:11px;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--muted);font-weight:700}.footer{color:var(--muted);font-size:12px;text-align:center;padding:25px 0 10px}
+@media(max-width:680px){.app{padding:12px}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.stat{padding:13px}.stat strong{font-size:24px}.section-head{align-items:flex-start}.section-head h2{font-size:19px}.student-card{align-items:flex-start;flex-wrap:wrap}.student-card .actions{width:100%;justify-content:flex-start;padding-left:54px}.grid2{grid-template-columns:1fr}.modal-backdrop{align-items:flex-end;padding:0}.modal{border-radius:20px 20px 0 0;max-height:92vh}.info-grid{grid-template-columns:1fr 1fr}.top .primary{padding:9px 10px;font-size:13px}}
+</style>
+</head>
+<body>
+<div id="cloudGate" style="max-width:520px;margin:24px auto;padding:18px;font-family:system-ui,sans-serif;color:#18332e">
+<div style="background:white;border:1px solid #e2eae6;border-radius:18px;padding:20px">
+<h2>Student Manager — Firebase setup</h2>
+<p id="gateMessage">Enter the Firebase web app config from Project settings → Your apps.</p>
+<form id="configForm">
+<div class="field"><label>API key</label><input name="apiKey" value="AIzaSyAfrIsblR4DiFbADg137KMYfqR_5DZc4W0" required></div>
+<div class="field"><label>Auth domain</label><input name="authDomain" value="tuition-classes-management.firebaseapp.com" required placeholder="your-project.firebaseapp.com"></div>
+<div class="field"><label>Project ID</label><input name="projectId" value="tuition-classes-management" required></div>
+<div class="field"><label>Storage bucket (if shown)</label><input name="storageBucket" value="tuition-classes-management.firebasestorage.app"></div>
+<div class="field"><label>Messaging sender ID (if shown)</label><input name="messagingSenderId" value="571531693870"></div>
+<div class="field"><label>App ID</label><input name="appId" value="1:571531693870:web:d46fb4ed3c16d9698c74bf" required></div>
+<div class="field"><label>Measurement ID (optional)</label><input name="measurementId" value="G-CM2MD4H77Y"></div>
+<button class="primary" type="submit">Connect Firebase</button></form>
+<div id="authPanel" class="hidden"><hr><h3>Admin login</h3><form id="loginForm">
+<div class="field"><label>Admin email</label><input name="email" type="email" required autocomplete="username"></div>
+<div class="field"><label>Password</label><input name="password" type="password" required autocomplete="current-password"></div>
+<button class="primary" type="submit">Sign in</button></form><p id="authError" style="color:#b64242"></p></div>
+<p style="font-size:12px;color:#6b7d78">Never share your password. Use secure Firestore Rules before storing real student data.</p>
+</div></div>
+
+<div class="app" id="mainApp" style="display:none">
+  <header class="top">
+    <div class="brand"><div class="logo">✦</div><div><h1>Student Manager</h1><p>Attendance · Students · Fees</p></div></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span id="cloudStatus" style="font-size:12px;color:#6b7d78">Cloud</span><button class="plain" onclick="window.studentCloudSignOut&&window.studentCloudSignOut()">Sign out</button><button class="primary" onclick="openStudentForm()">＋ Add Student</button></div>
+  </header>
+  <nav class="tabs" aria-label="Main navigation">
+    <button class="tab active" data-view="dashboard">Dashboard</button><button class="tab" data-view="attendance">Attendance</button><button class="tab" data-view="students">Students</button><button class="tab" data-view="fees">Fees</button><button class="tab" data-view="leave">Leave</button><button class="tab" data-view="reports">Reports</button>
+  </nav>
+  <main>
+    <section id="dashboard" class="view active">
+      <div class="section-head"><div><h2>Dashboard</h2><p class="sub" id="todayLabel"></p></div><button class="soft" onclick="switchView('attendance')">Mark attendance →</button></div>
+      <div class="stats">
+        <div class="stat"><span class="symbol">👥</span><div class="label">Total students</div><strong id="totalCount">0</strong></div>
+        <div class="stat"><span class="symbol">✓</span><div class="label">Present today</div><strong id="presentCount">0</strong></div>
+        <div class="stat"><span class="symbol">○</span><div class="label">Absent today</div><strong id="absentCount">0</strong></div>
+        <div class="stat"><span class="symbol">₹</span><div class="label">Fees due</div><strong id="dueTotal">₹0</strong></div>
+      </div>
+      <div class="panel"><div class="row between"><h3>Quick attendance</h3><span class="sub" id="attendanceDateShort"></span></div><div id="dashboardAttendance" class="list"></div></div>
+      <div class="notice">Cloud-connected prototype. Keep student records private and use secure Firestore Rules.</div>
+    </section>
+    <section id="attendance" class="view">
+      <div class="section-head"><div><h2>Attendance</h2><p class="sub">Tap a status beside each student's name.</p></div></div>
+      <div class="filters"><input type="date" id="attendanceDate" aria-label="Attendance date"><select id="attendanceClass"><option value="">All classes</option></select><input id="attendanceSearch" placeholder="Search student…"></div>
+      <div class="row between" style="margin-bottom:12px"><span class="sub" id="attendanceSummary"></span><button class="soft mini" onclick="markAllPresent()">Mark all present</button></div>
+      <div id="attendanceList" class="list"></div>
+    </section>
+    <section id="students" class="view">
+      <div class="section-head"><div><h2>Students</h2><p class="sub">Tap a student to see their full profile.</p></div><button class="primary" onclick="openStudentForm()">＋ Add</button></div>
+      <div class="filters"><input id="studentSearch" placeholder="Search name, class, phone…"><select id="studentClass"><option value="">All classes</option></select></div>
+      <div id="studentsList" class="list"></div>
+    </section>
+    <section id="fees" class="view">
+      <div class="section-head"><div><h2>Fees</h2><p class="sub">Record payments and track outstanding amounts.</p></div></div>
+      <div class="stats"><div class="stat"><div class="label">Total expected</div><strong id="feesExpected">₹0</strong></div><div class="stat"><div class="label">Total paid</div><strong id="feesPaid">₹0</strong></div></div>
+      <div class="panel"><div class="filters"><input id="feesSearch" placeholder="Search student…"><select id="feesFilter"><option value="">All fee statuses</option><option value="due">Has dues</option><option value="clear">Paid in full</option></select></div><div id="feesList" class="list"></div></div>
+    </section>
+    <section id="leave" class="view">
+      <div class="section-head"><div><h2>Leave records</h2><p class="sub">Record approved leave separately from absence.</p></div><button class="primary" onclick="openLeaveForm()">＋ Add leave</button></div>
+      <div id="leaveList" class="list"></div>
+    </section>
+    <section id="reports" class="view">
+      <div class="section-head"><div><h2>Reports</h2><p class="sub">Attendance and fees summary for your records.</p></div><button class="soft" onclick="exportCSV()">Export CSV ↓</button></div>
+      <div class="stats"><div class="stat"><div class="label">Attendance entries</div><strong id="reportEntries">0</strong></div><div class="stat"><div class="label">Marked present</div><strong id="reportPresent">0</strong></div><div class="stat"><div class="label">Leave records</div><strong id="reportLeave">0</strong></div><div class="stat"><div class="label">Students with dues</div><strong id="reportDueStudents">0</strong></div></div>
+      <div class="panel"><h3>Student fee summary</h3><div class="table-wrap"><table><thead><tr><th>Student</th><th>Class</th><th>Expected</th><th>Paid</th><th>Due</th></tr></thead><tbody id="reportTable"></tbody></table></div></div>
+      <div class="notice">CSV export contains student contact and fee details. Keep the exported file private.</div>
+    </section>
+  </main>
+  <div class="footer">Student Manager · Starter prototype</div>
+</div>
+<div id="modalBackdrop" class="modal-backdrop" onclick="if(event.target===this)closeModal()"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="row between"><h2 id="modalTitle">Details</h2><button class="plain" onclick="closeModal()" aria-label="Close">✕</button></div><div id="modalBody"></div></div></div>
+<script>
+const STORE='studentManagerStarter_v1';
+let db=loadDB();
+function loadDB(){try{const x=JSON.parse(localStorage.getItem(STORE));if(x&&Array.isArray(x.students))return x}catch(e){}return {students:[],attendance:{},leaves:[],payments:[]}}
+function saveDB(){localStorage.setItem(STORE,JSON.stringify(db));renderAll();if(window.studentCloudSave)window.studentCloudSave(db)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function money(n){return '₹'+(Number(n)||0).toLocaleString('en-IN')}
+function today(){let d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function statusFor(id,date){return (db.attendance[date]||{})[id]||'Unmarked'}
+function feeExpected(s){return Number(s.monthlyFee)||0}
+function feePaid(s){return db.payments.filter(p=>p.studentId===s.id).reduce((a,p)=>a+Number(p.amount||0),0)}
+function feeDue(s){return Math.max(0,feeExpected(s)-feePaid(s))}
+function classOptions(){return [...new Set(db.students.map(s=>s.className).filter(Boolean))].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}))}
+function fillClassSelects(){['attendanceClass','studentClass'].forEach(id=>{let el=document.getElementById(id),old=el.value;el.innerHTML='<option value="">All classes</option>'+classOptions().map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');el.value=old})}
+function switchView(v){document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id===v));document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===v));renderAll();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));
+function card(s,extra=''){return `<div class="student-card"><div class="avatar">${esc((s.name||'?').trim().split(/\s+/).map(x=>x[0]).slice(0,2).join('').toUpperCase())}</div><div class="student-main"><strong>${esc(s.name)}</strong><small>${esc(s.className||'No class')} · ${esc(s.phone||'No phone')}</small></div>${extra}</div>`}
+function attendanceRow(s,date,compact=false){let st=statusFor(s.id,date);let buttons=['Present','Absent','Late','Leave'].map(x=>`<button class="mini ${st===x?({'Present':'present','Absent':'absent','Late':'late','Leave':'leave'}[x]):'plain'}" onclick="setAttendance('${s.id}','${date}','${x}')">${x}</button>`).join('');return card(s,`<div class="actions">${compact?`<button class="mini ${st==='Present'?'present':'plain'}" onclick="setAttendance('${s.id}','${date}','Present')">✓ Present</button><button class="mini ${st==='Absent'?'absent':'plain'}" onclick="setAttendance('${s.id}','${date}','Absent')">Absent</button>`:buttons}<button class="mini plain" onclick="showProfile('${s.id}')">Profile</button></div>`)}
+function setAttendance(id,date,status){if(!db.attendance[date])db.attendance[date]={};db.attendance[date][id]=status;saveDB()}
+function markAllPresent(){let date=document.getElementById('attendanceDate').value||today();if(!db.attendance[date])db.attendance[date]={};filteredStudentsForAttendance().forEach(s=>db.attendance[date][s.id]='Present');saveDB()}
+function filteredStudentsForAttendance(){let c=document.getElementById('attendanceClass').value,q=document.getElementById('attendanceSearch').value.toLowerCase();return db.students.filter(s=>(!c||s.className===c)&&(!q||(s.name+' '+s.className+' '+s.phone).toLowerCase().includes(q)))}
+function openModal(title,body){document.getElementById('modalTitle').textContent=title;document.getElementById('modalBody').innerHTML=body;document.getElementById('modalBackdrop').classList.add('show')}
+function closeModal(){document.getElementById('modalBackdrop').classList.remove('show')}
+function openStudentForm(sid=''){let s=db.students.find(x=>x.id===sid)||{};openModal(sid?'Edit student':'Add student',`<form id="studentForm"><div class="grid2"><div class="field"><label>Full name *</label><input name="name" required value="${esc(s.name||'')}" placeholder="Student name"></div><div class="field"><label>Class / batch *</label><input name="className" required value="${esc(s.className||'')}" placeholder="e.g. Class 8"></div><div class="field"><label>Roll number</label><input name="roll" value="${esc(s.roll||'')}"></div><div class="field"><label>Joining date *</label><input type="date" name="joined" required value="${esc(s.joined||today())}"></div><div class="field"><label>Parent contact</label><input name="phone" inputmode="tel" value="${esc(s.phone||'')}" placeholder="Phone number"></div><div class="field"><label>Monthly fee (₹)</label><input name="monthlyFee" type="number" min="0" value="${esc(s.monthlyFee??'')}" placeholder="e.g. 1500"></div></div><div class="field"><label>Notes (optional)</label><textarea name="notes" rows="2">${esc(s.notes||'')}</textarea></div><div class="modal-actions"><button type="button" class="plain" onclick="closeModal()">Cancel</button><button class="primary" type="submit">Save student</button></div></form>`);
+document.getElementById('studentForm').onsubmit=e=>{e.preventDefault();let f=new FormData(e.target),data=Object.fromEntries(f.entries());data.monthlyFee=Number(data.monthlyFee)||0;if(sid){Object.assign(s,data)}else{data.id='stu_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,6);db.students.push(data)}closeModal();saveDB()}}
+function showProfile(id){let s=db.students.find(x=>x.id===id);if(!s)return;let attend=Object.entries(db.attendance).filter(([d,rows])=>rows[id]).sort((a,b)=>b[0].localeCompare(a[0])).slice(0,8);let pays=db.payments.filter(p=>p.studentId===id).sort((a,b)=>b.date.localeCompare(a.date));let leaves=db.leaves.filter(l=>l.studentId===id);openModal(s.name,`<div class="info-grid"><div class="info"><small>Class / batch</small><strong>${esc(s.className||'—')}</strong></div><div class="info"><small>Roll number</small><strong>${esc(s.roll||'—')}</strong></div><div class="info"><small>Joined</small><strong>${esc(s.joined||'—')}</strong></div><div class="info"><small>Parent contact</small><strong>${esc(s.phone||'—')}</strong></div><div class="info"><small>Monthly fee</small><strong>${money(s.monthlyFee)}</strong></div><div class="info"><small>Fees due</small><strong>${money(feeDue(s))}</strong></div></div><div class="panel"><h3>Attendance history</h3>${attend.length?attend.map(([d,r])=>`<div class="row between" style="padding:6px 0"><span>${esc(d)}</span><span class="pill ${({'Present':'present','Absent':'absent','Late':'late','Leave':'leave'}[r[id]]||'unmarked')}">${esc(r[id])}</span></div>`).join(''):'<p class="sub">No attendance recorded yet.</p>'}</div><div class="panel"><div class="row between"><h3>Fee payments</h3><button class="soft mini" onclick="closeModal();openPaymentForm('${s.id}')">＋ Payment</button></div>${pays.length?pays.map(p=>`<div class="row between" style="padding:6px 0"><span>${esc(p.date)} ${p.note?'· '+esc(p.note):''}</span><strong>${money(p.amount)}</strong></div>`).join(''):'<p class="sub">No payments recorded.</p>'}</div><div class="panel"><h3>Leave records (${leaves.length})</h3>${leaves.map(l=>`<p class="sub">${esc(l.from)} to ${esc(l.to)} · ${esc(l.reason||'No reason')}</p>`).join('')||'<p class="sub">No leave records.</p>'}</div><div class="modal-actions"><button class="plain" onclick="closeModal();openStudentForm('${s.id}')">Edit</button><button class="danger" onclick="deleteStudent('${s.id}')">Delete student</button></div>`)}
+function deleteStudent(id){if(!confirm('Delete this student and their attendance, leave and payment records? This cannot be undone.'))return;db.students=db.students.filter(s=>s.id!==id);Object.keys(db.attendance).forEach(d=>delete db.attendance[d][id]);db.leaves=db.leaves.filter(l=>l.studentId!==id);db.payments=db.payments.filter(p=>p.studentId!==id);closeModal();saveDB()}
+function openPaymentForm(id){let s=db.students.find(x=>x.id===id);if(!s)return;openModal('Record fee payment',`<p class="sub" style="margin-bottom:14px">${esc(s.name)} · Current due ${money(feeDue(s))}</p><form id="paymentForm"><div class="field"><label>Amount received (₹) *</label><input name="amount" type="number" min="1" required></div><div class="field"><label>Payment date *</label><input name="date" type="date" required value="${today()}"></div><div class="field"><label>Note / month</label><input name="note" placeholder="e.g. October fees"></div><div class="modal-actions"><button type="button" class="plain" onclick="closeModal()">Cancel</button><button class="primary">Save payment</button></div></form>`);document.getElementById('paymentForm').onsubmit=e=>{e.preventDefault();let f=new FormData(e.target);db.payments.push({id:'pay_'+Date.now(),studentId:id,amount:Number(f.get('amount')),date:f.get('date'),note:f.get('note')});closeModal();saveDB()}}
+function openLeaveForm(){if(!db.students.length){alert('Pehle ek student add karo.');return}openModal('Add leave record',`<form id="leaveForm"><div class="field"><label>Student *</label><select name="studentId" required>${db.students.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(s=>`<option value="${s.id}">${esc(s.name)} · ${esc(s.className)}</option>`).join('')}</select></div><div class="grid2"><div class="field"><label>From *</label><input type="date" name="from" required value="${today()}"></div><div class="field"><label>To *</label><input type="date" name="to" required value="${today()}"></div></div><div class="field"><label>Reason / note</label><input name="reason" placeholder="Optional"></div><div class="field"><label>Status</label><select name="status"><option>Approved</option><option>Pending</option><option>Rejected</option></select></div><div class="modal-actions"><button type="button" class="plain" onclick="closeModal()">Cancel</button><button class="primary">Save leave</button></div></form>`);document.getElementById('leaveForm').onsubmit=e=>{e.preventDefault();let d=Object.fromEntries(new FormData(e.target).entries());if(d.to<d.from){alert('End date cannot be before start date.');return}d.id='lv_'+Date.now();db.leaves.push(d);if(d.status==='Approved'){for(let dt=d.from;dt<=d.to;dt=nextDay(dt)){if(!db.attendance[dt])db.attendance[dt]={};db.attendance[dt][d.studentId]='Leave'}}closeModal();saveDB()}}
+function nextDay(s){let d=new Date(s+'T12:00:00');d.setDate(d.getDate()+1);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function renderAll(){let date=document.getElementById('attendanceDate').value||today();document.getElementById('todayLabel').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'});document.getElementById('attendanceDateShort').textContent=date;fillClassSelects();
+document.getElementById('totalCount').textContent=db.students.length;let rows=db.attendance[today()]||{};document.getElementById('presentCount').textContent=Object.values(rows).filter(x=>x==='Present').length;document.getElementById('absentCount').textContent=Object.values(rows).filter(x=>x==='Absent').length;document.getElementById('dueTotal').textContent=money(db.students.reduce((a,s)=>a+feeDue(s),0));
+let da=db.students.slice().sort((a,b)=>a.name.localeCompare(b.name)).slice(0,5);document.getElementById('dashboardAttendance').innerHTML=da.length?da.map(s=>attendanceRow(s,today(),true)).join(''):'<div class="empty">No students yet. Tap “Add Student” to begin.</div>';
+let al=filteredStudentsForAttendance();document.getElementById('attendanceSummary').textContent=`${al.length} students · ${date}`;document.getElementById('attendanceList').innerHTML=al.length?al.map(s=>attendanceRow(s,date)).join(''):'<div class="empty">No students match. Add students or change filters.</div>';
+let q=(document.getElementById('studentSearch').value||'').toLowerCase(),c=document.getElementById('studentClass').value;let ss=db.students.filter(s=>(!c||s.className===c)&&(!q||(s.name+' '+s.className+' '+s.phone+' '+s.roll).toLowerCase().includes(q))).sort((a,b)=>a.name.localeCompare(b.name));document.getElementById('studentsList').innerHTML=ss.length?ss.map(s=>card(s,`<div class="actions"><button class="mini soft" onclick="showProfile('${s.id}')">View profile</button></div>`)).join(''):'<div class="empty">No students found. Add your first student.</div>';
+let totalExpected=db.students.reduce((a,s)=>a+feeExpected(s),0),totalPaid=db.payments.reduce((a,p)=>a+Number(p.amount),0);document.getElementById('feesExpected').textContent=money(totalExpected);document.getElementById('feesPaid').textContent=money(totalPaid);let fq=(document.getElementById('feesSearch').value||'').toLowerCase(),ff=document.getElementById('feesFilter').value;let fs=db.students.filter(s=>(!fq||s.name.toLowerCase().includes(fq))&&(!ff||(ff==='due'?feeDue(s)>0:feeDue(s)===0))).sort((a,b)=>a.name.localeCompare(b.name));document.getElementById('feesList').innerHTML=fs.length?fs.map(s=>card(s,`<div class="actions"><div style="text-align:right;font-size:12px"><div>Due <strong>${money(feeDue(s))}</strong></div><small class="sub">Paid ${money(feePaid(s))}</small></div><button class="mini primary" onclick="openPaymentForm('${s.id}')">＋ Payment</button></div>`)).join(''):'<div class="empty">No students match this filter.</div>';
+let ls=db.leaves.slice().sort((a,b)=>b.from.localeCompare(a.from));document.getElementById('leaveList').innerHTML=ls.length?ls.map(l=>{let s=db.students.find(x=>x.id===l.studentId);return `<div class="student-card"><div class="student-main"><strong>${esc(s?s.name:'Deleted student')}</strong><small>${esc(l.from)} → ${esc(l.to)} · ${esc(l.reason||'No reason')}</small></div><span class="pill ${l.status==='Approved'?'present':l.status==='Pending'?'late':'absent'}">${esc(l.status)}</span><button class="mini danger" onclick="deleteLeave('${l.id}')">Delete</button></div>`}).join(''):'<div class="empty">No leave records yet.</div>';
+let all=Object.values(db.attendance).flatMap(x=>Object.values(x));document.getElementById('reportEntries').textContent=all.length;document.getElementById('reportPresent').textContent=all.filter(x=>x==='Present').length;document.getElementById('reportLeave').textContent=db.leaves.length;document.getElementById('reportDueStudents').textContent=db.students.filter(s=>feeDue(s)>0).length;document.getElementById('reportTable').innerHTML=db.students.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(s=>`<tr><td>${esc(s.name)}</td><td>${esc(s.className||'—')}</td><td>${money(feeExpected(s))}</td><td>${money(feePaid(s))}</td><td>${money(feeDue(s))}</td></tr>`).join('')||'<tr><td colspan="5">No students added yet.</td></tr>'}
+function deleteLeave(id){db.leaves=db.leaves.filter(l=>l.id!==id);saveDB()}
+function exportCSV(){let data=[['Student','Class','Roll','Joining date','Parent contact','Monthly fee','Total payments','Due'],...db.students.map(s=>[s.name,s.className,s.roll,s.joined,s.phone,feeExpected(s),feePaid(s),feeDue(s)])];let csv=data.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');let blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='student-fee-report.csv';a.click();URL.revokeObjectURL(url)}
+['attendanceDate','attendanceClass','attendanceSearch','studentSearch','studentClass','feesSearch','feesFilter'].forEach(id=>document.getElementById(id).addEventListener('input',renderAll));
+document.getElementById('attendanceDate').value=today();renderAll();
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+const gate=document.getElementById("cloudGate"), appBox=document.getElementById("mainApp"), cf=document.getElementById("configForm"), ap=document.getElementById("authPanel"), lf=document.getElementById("loginForm"), msg=document.getElementById("gateMessage"), err=document.getElementById("authError");
+let auth,fs,user,saveTimer;
+function status(t){const e=document.getElementById("cloudStatus");if(e)e.textContent=t}
+function showLogin(){gate.style.display="block";appBox.style.display="none";cf.style.display="none";ap.classList.remove("hidden");msg.textContent="Sign in with the admin user you created in Firebase Authentication."}
+function start(cfg){
+ const fb=initializeApp(cfg);auth=getAuth(fb);fs=getFirestore(fb);cf.style.display="none";ap.classList.remove("hidden");msg.textContent="Firebase connected.";
+ onAuthStateChanged(auth,async u=>{
+  user=u;if(!u){showLogin();return}
+  gate.style.display="none";appBox.style.display="block";status("Loading cloud…");
+  try{
+   const ref=doc(fs,"studentManagerData",u.uid),snap=await getDoc(ref);
+   if(snap.exists()){const cloud=snap.data().data;if(cloud&&Array.isArray(cloud.students)){localStorage.setItem("studentManagerStarter_v1",JSON.stringify(cloud));location.reload();return}}
+   const local=JSON.parse(localStorage.getItem("studentManagerStarter_v1")||"null");
+   const initial=local&&Array.isArray(local.students)?local:{students:[],attendance:{},leaves:[],payments:[]};
+   await setDoc(ref,{data:initial,updatedAt:new Date().toISOString()});
+   status("Cloud connected");
+   window.studentCloudSave=data=>{if(!user)return;status("Saving…");clearTimeout(saveTimer);saveTimer=setTimeout(async()=>{try{await setDoc(doc(fs,"studentManagerData",user.uid),{data,updatedAt:new Date().toISOString()});status("Saved to cloud")}catch(e){status("Save failed — check Rules");console.error(e)}},400)};
+   window.studentCloudSignOut=()=>signOut(auth);
+  }catch(e){status("Cloud error");err.textContent="Cloud setup error: "+e.code+". Check Firestore Rules and config.";console.error(e)}
+ });
+}
+cf.addEventListener("submit",e=>{e.preventDefault();const f=new FormData(cf),cfg={apiKey:f.get("apiKey").trim(),authDomain:f.get("authDomain").trim(),projectId:f.get("projectId").trim(),appId:f.get("appId").trim()};["storageBucket","messagingSenderId","measurementId"].forEach(k=>{const v=f.get(k).trim();if(v)cfg[k]=v});try{localStorage.setItem("studentManagerFirebaseConfig",JSON.stringify(cfg));start(cfg)}catch(x){msg.textContent="Could not initialize Firebase: "+x.message}});
+lf.addEventListener("submit",async e=>{e.preventDefault();err.textContent="";const f=new FormData(lf);try{await signInWithEmailAndPassword(auth,f.get("email"),f.get("password"))}catch(x){err.textContent="Login failed: "+x.code}});
+const saved=localStorage.getItem("studentManagerFirebaseConfig");if(saved){try{start(JSON.parse(saved))}catch(e){msg.textContent="Re-enter Firebase config.";cf.style.display="block"}}
+</script>
+
+</body>
+</html>
